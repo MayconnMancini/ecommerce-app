@@ -20,6 +20,9 @@ class CreateVendasItemTable extends Migration
             $table->integer('quantidade');
             $table->float('preco');
             $table->timestamps();
+
+            $table->foreign('venda_id')->references('id')->on('vendas');
+            $table->foreign('produto_id')->references('id')->on('produtos');
         });
     }
 

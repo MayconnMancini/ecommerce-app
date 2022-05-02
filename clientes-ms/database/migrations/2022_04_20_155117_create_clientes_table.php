@@ -22,6 +22,8 @@ class CreateClientesTable extends Migration
             $table->string('login');
             $table->string('senha');
             $table->timestamps();
+
+            $table->foreign('endereco_id')->references('id')->on('enderecos');
         });
     }
 

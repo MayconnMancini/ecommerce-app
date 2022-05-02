@@ -13,10 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\VendaController;
+use App\Http\Controllers\ProdutoController;
+
+Route::get('/', [VendaController::class, 'index']);
+Route::get('/vendas/create', [VendaController::class, 'create']);
+
+//Route::resource('produtos', 'ProdutoController');
+
+
+Route::get('/produtos', [ProdutoController::class, 'index']);
+
 
 Route::get('/user', function () {
   return view('user');
+});
+
+
+
+Route::get('/produtos/{id}', function ($id) {
+  return view('produto',['id' => $id]);
 });
