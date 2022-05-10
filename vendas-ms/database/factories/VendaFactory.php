@@ -3,9 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class ProdutoFactory extends Factory
+class VendaFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,12 +15,10 @@ class ProdutoFactory extends Factory
     {
         return [
           'id' => $this->faker->uuid(),
-          'nome' => $this->faker->words(2, true),
-          'descricao' => $this->faker->paragraph(),
-          'valor' => $this->faker->randomFloat(2, 1, 9999),
-          'estoque' => $this->faker->randomNumber(5, false),
+          'usuario_id' => $this->faker->uuid(),
+          'pagamento_id' => $this->faker->uuid(),
+          'total' => 0,
           'created_at' => now(),
-          
         ];
     }
 }

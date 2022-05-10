@@ -4,15 +4,12 @@
 
 @section('content')
 
-<h1>VENDAS MICROSERVICES</h1>
+<h1>VENDAS</h1>
 
 <div>
   <ul>
     <li>
       <a href="/vendas/create">Nova Venda</a>
-    </li>
-    <li>
-      <a href="/vendas">Vendas</a>
     </li>
     <li>
       <a href="/produtos">Produtos</a>

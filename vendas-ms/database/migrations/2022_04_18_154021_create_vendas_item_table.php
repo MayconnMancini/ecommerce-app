@@ -18,7 +18,8 @@ class CreateVendasItemTable extends Migration
             $table->uuid('venda_id');
             $table->uuid('produto_id');
             $table->integer('quantidade');
-            $table->float('preco');
+            $table->float('preco', 15, 2);
+            $table->float('subtotal', 15, 2);
             $table->timestamps();
 
             $table->foreign('venda_id')->references('id')->on('vendas');

@@ -16,10 +16,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VendaController;
 use App\Http\Controllers\ProdutoController;
 
-Route::get('/', [VendaController::class, 'index']);
-Route::get('/vendas/create', [VendaController::class, 'create']);
 
-//Route::resource('produtos', 'ProdutoController');
+Route::get('/', function () {
+  return view('welcome');
+});
+
+Route::get('/vendas', [VendaController::class, 'index']);
+Route::get('/vendas/create', [VendaController::class, 'create']);
+Route::post('/vendas', [VendaController::class, 'store']);
 
 
 Route::get('/produtos', [ProdutoController::class, 'index']);

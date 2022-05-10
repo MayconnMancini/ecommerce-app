@@ -17,7 +17,7 @@ class CreateVendasTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('usuario_id');
             $table->uuid('pagamento_id');
-            $table->float('total');
+            $table->float('total',15,2);
             $table->timestamps();
         });
     }
