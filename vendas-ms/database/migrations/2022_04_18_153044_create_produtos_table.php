@@ -17,7 +17,7 @@ class CreateProdutosTable extends Migration
             $table->uuid('id')->primary();
             $table->string('nome');
             $table->text('descricao');
-            $table->float('valor', 15, 2);
+            $table->float('preco', 15, 2);
             $table->integer('estoque');
             $table->timestamps();
         });

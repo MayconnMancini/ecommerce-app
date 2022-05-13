@@ -27,7 +27,7 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+      return view('produtos.create');
     }
 
     /**
@@ -38,7 +38,24 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'nome' => 'required',
+        'descricao' => 'required',
+        'preco' => 'required',
+        'estoque' => 'required'
+        ]);
+
+        $produto = new Produto;
+
+        $produto->nome = $request->nome;
+        $produto->descricao = $request->descricao;
+        $produto->preco = $request->preco;
+        $produto->estoque = $request->estoque;
+
+        $produto->save();
+
+        return redirect()->route('produtos.index')
+        ->with('msg','Produto cadastrado com sucesso.');        
     }
 
     /**
@@ -49,7 +66,10 @@ class ProdutoController extends Controller
      */
     public function show($id)
     {
-        //
+
+      $produto = Produto::findOrFail($id);
+
+      return view('produtos.show', ['produto' => $produto]);
     }
 
     /**
@@ -60,7 +80,9 @@ class ProdutoController extends Controller
      */
     public function edit($id)
     {
-        //
+      $produto = Produto::findOrFail($id);
+
+      return view('produtos.edit', ['produto' => $produto]);
     }
 
     /**

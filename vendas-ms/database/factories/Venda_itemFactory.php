@@ -24,7 +24,7 @@ class Venda_itemFactory extends Factory
           'venda_id' => Venda::all()->random()->id,
           'produto_id' =>  $produto_id,
           'quantidade' => $quantidade,
-          'preco' => $produto['valor'],
+          'preco' => $produto['preco'],
           'subtotal' => $subtotal,
           'created_at' => now(),
         ];

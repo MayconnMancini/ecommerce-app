@@ -18,7 +18,7 @@ class ProdutoFactory extends Factory
           'id' => $this->faker->uuid(),
           'nome' => $this->faker->words(2, true),
           'descricao' => $this->faker->paragraph(),
-          'valor' => $this->faker->randomFloat(2, 1, 9999),
+          'preco' => $this->faker->randomFloat(2, 1, 9999),
           'estoque' => $this->faker->randomNumber(5, false),
           'created_at' => now(),
           

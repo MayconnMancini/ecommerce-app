@@ -27,7 +27,7 @@
 
 <body>
 
-    <div class="container">
+
         <header>
             <nav class="navbar navbar-expand-md navbar-light bg-light">
 
@@ -48,13 +48,23 @@
             </nav>
         </header>
 
-        @yield('content')
+        <main>
+          <div class="container-fluid">
+            <div class="row">
+              @if (session('msg'))
+                <p class="msg">{{ session('msg') }}</p> 
+              @endif
+
+              @yield('content')
+            </div>
+          </div>
+        </main>
 
         <footer>
             <p>Vendas Microservices &copy; 2022</p>
         </footer>
 
-    </div>
+ 
 
 
 </body>
