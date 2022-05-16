@@ -21,9 +21,12 @@ Route::get('/', function () {
   return view('welcome');
 });
 
-Route::get('/vendas', [VendaController::class, 'index']);
-Route::get('/vendas/create', [VendaController::class, 'create']);
-Route::post('/vendas', [VendaController::class, 'store']);
+//Route::get('/vendas', [VendaController::class, 'index']);
+//Route::get('/vendas/create', [VendaController::class, 'create']);
+//Route::post('/vendas', [VendaController::class, 'store']);
+
+Route::resource('vendas', VendaController::class);
+Route::delete('/vendas/{venda}/{item}', [VendaController::class, 'deleteItens'])->name('vendas.deleteItens');
 
 Route::resource('produtos', ProdutoController::class);
 
@@ -41,6 +44,6 @@ Route::get('/user', function () {
 
 
 
-Route::get('/produtos/{id}', function ($id) {
-  return view('produto',['id' => $id]);
-});
+//Route::get('/produtos/{id}', function ($id) {
+//  return view('produto',['id' => $id]);
+//});

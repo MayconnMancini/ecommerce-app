@@ -26,46 +26,45 @@
 </head>
 
 <body>
-
-
-        <header>
-            <nav class="navbar navbar-expand-md navbar-light bg-light">
-
-                <a class="navbar-brand" href="/">Vendas MS</a>
-                <div class="collapse navbar-collapse" id="navbar">
-                    <ul class="navbar-nav ">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/">Home</a>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="/">Dashboard</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Clientes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/produtos">Produtos</a>
+                            <a class="nav-link" href="{{ route('produtos.index') }}">Produtos</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/vendas/create">Criar nova venda</a>
+                            <a class="nav-link" href="{{ route('vendas.index') }}">Vendas</a>
                         </li>
                     </ul>
+                    <span class="navbar-text">
+                    </span>
                 </div>
-            </nav>
-        </header>
+            </div><!-- fim container -->
+        </nav>
 
-        <main>
-          <div class="container-fluid">
-            <div class="row">
-              @if (session('msg'))
-                <p class="msg">{{ session('msg') }}</p> 
-              @endif
+    </header>
 
-              @yield('content')
-            </div>
-          </div>
-        </main>
+    <main>
 
-        <footer>
+        @yield('content')
+
+
+    </main>
+    <div class="container">
+        <footer class="py-5 text-center">
             <p>Vendas Microservices &copy; 2022</p>
         </footer>
-
- 
-
+    </div>
 
 </body>
 

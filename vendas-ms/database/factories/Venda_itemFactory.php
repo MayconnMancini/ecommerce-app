@@ -18,7 +18,7 @@ class Venda_itemFactory extends Factory
       $produto_id = Produto::all()->random()->id;  
       $produto = Produto::find($produto_id);
       $quantidade = $this->faker->randomNumber(2, false);
-      $subtotal = $quantidade * $produto['valor'];
+      $subtotal = $quantidade * $produto['preco'];
         return [
           'id' => $this->faker->uuid(),
           'venda_id' => Venda::all()->random()->id,

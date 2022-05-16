@@ -10,5 +10,5 @@ class Venda_item extends Model
     use HasFactory;
     use \App\Traits\TraitUuid;
 
-    protected $table = 'vendas_item';
+    protected $table = 'venda_item';
 }

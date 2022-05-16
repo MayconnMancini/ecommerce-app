@@ -9,4 +9,14 @@ class Produto extends Model
 {
     use HasFactory;
     use \App\Traits\TraitUuid;
+
+    public function vendas()
+    {
+        return $this->belongsToMany("App\Models\Venda", 'venda_item')->withPivot(
+          'id',  
+          'quantidade',
+          'preco',
+          'subtotal'
+        );
+    }
 }

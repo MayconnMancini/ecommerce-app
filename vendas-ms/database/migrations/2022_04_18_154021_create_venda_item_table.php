@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVendasItemTable extends Migration
+class CreateVendaItemTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class CreateVendasItemTable extends Migration
      */
     public function up()
     {
-        Schema::create('vendas_item', function (Blueprint $table) {
+        Schema::create('venda_item', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('venda_id');
-            $table->uuid('produto_id');
+            $table->foreignUuid('venda_id');
+            $table->foreignUuid('produto_id');
             $table->integer('quantidade');
             $table->float('preco', 15, 2);
             $table->float('subtotal', 15, 2);
             $table->timestamps();
 
-            $table->foreign('venda_id')->references('id')->on('vendas');
-            $table->foreign('produto_id')->references('id')->on('produtos');
+            $table->foreign('venda_id')->references('id')->on('vendas')->onDelete('cascade');
+            $table->foreign('produto_id')->references('id')->on('produtos')->onDelete('cascade');
         });
     }
 

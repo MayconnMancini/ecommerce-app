@@ -17,6 +17,7 @@ class VendaFactory extends Factory
           'id' => $this->faker->uuid(),
           'usuario_id' => $this->faker->uuid(),
           'pagamento_id' => $this->faker->uuid(),
+          'dataVEnda' => $this->faker->dateTimeThisYear(),
           'total' => 0,
           'created_at' => now(),
         ];
