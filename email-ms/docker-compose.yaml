@@ -1,0 +1,12 @@
+version: '3.9'
+networks:
+  kafka:
+    external: true
+services:
+  email_queue:
+    build: .
+    volumes:
+      - .:/app
+    command: 'php artisan queue:work'
+    networks:
+      - kafka

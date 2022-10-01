@@ -1,0 +1,23 @@
+
+   InvalidArgumentException 
+
+  No connector for [kafka].
+
+  at vendor/laravel/framework/src/Illuminate/Queue/QueueManager.php:178
+    174▕      */
+    175▕     protected function getConnector($driver)
+    176▕     {
+    177▕         if (! isset($this->connectors[$driver])) {
+  ➜ 178▕             throw new InvalidArgumentException("No connector for [$driver].");
+    179▕         }
+    180▕ 
+    181▕         return call_user_func($this->connectors[$driver]);
+    182▕     }
+
+      [2m+3 vendor frames [22m
+  4   app/Providers/KafkaServiceProvider.php:17
+      Illuminate\Queue\QueueManager::__call("addConector")
+
+      [2m+7 vendor frames [22m
+  12  [internal]:0
+      Illuminate\Foundation\Application::Illuminate\Foundation\{closure}(Object(App\Providers\KafkaServiceProvider))
