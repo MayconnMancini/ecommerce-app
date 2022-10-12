@@ -14,7 +14,6 @@ class ProductController extends Controller
 
   public function index()
   {
-    
     return Product::all();
   }
 
@@ -30,12 +29,21 @@ class ProductController extends Controller
     ProductCreated::dispatch($product->toArray())->onQueue('products_topic');
 
     return response($product, Response::HTTP_CREATED);
-
   }
 
-  public function show(Product $product)
+  public function show($id)
   {
-    return $product;
+    try {
+      $product = Product::find($id)->first();
+
+      $array = $product->toArray();
+
+      return $array;
+    } catch (\Throwable $e) {
+      return response([
+        'error' => $e->getMessage()
+      ], 400);
+    }
   }
 
   public function edit($id)
@@ -43,23 +51,39 @@ class ProductController extends Controller
     //
   }
 
-  public function update(Request $request, Product $product)
-  { 
-    $product->update($request->only('name', 'description', 'price', 'inventory'));
+  public function update(Request $request)
+  {
+    try {
 
-    //ProductUpdated::dispatch($product->toArray())->onQueue('ambassador_topic');
-    ProductUpdated::dispatch($product->toArray())->onQueue('products_topic');
+      $product = Product::find($request->only('id'))->first();
 
-    return response($product, Response::HTTP_ACCEPTED);
+      $product->update($request->only('name', 'description', 'price', 'inventory'));
+
+      ProductUpdated::dispatch($product->toArray())->onQueue('products_topic');
+
+      return response($product, Response::HTTP_ACCEPTED);
+    } catch (\Throwable $e) {
+      return response([
+        'error' => $e->getMessage()
+      ], 400);
+    }
   }
 
-  public function destroy(Product $product)
+  public function destroy($id)
   {
-    $product->delete();
+    try {
+      $product = Product::find($id);
+      $product->delete();
 
-    //ProductDeleted::dispatch(['id' => $product->id])->onQueue('ambassador_topic');
-    ProductDeleted::dispatch(['id' => $product->id])->onQueue('products_topic');
-    
-    return response(null, Response::HTTP_NO_CONTENT);
+      ProductDeleted::dispatch(['id' => $product->id])->onQueue('products_topic');
+
+      return response([
+        'msg' => "Sucesso"
+      ], Response::HTTP_ACCEPTED);
+    } catch (\Throwable $e) {
+      return response([
+        'error' => $e->getMessage()
+      ], 400);
+    }
   }
 }

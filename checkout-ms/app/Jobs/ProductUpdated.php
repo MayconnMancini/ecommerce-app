@@ -23,8 +23,15 @@ class ProductUpdated implements ShouldQueue
 
     public function handle()
     {
+      var_dump('mensagem do customer-ms');
+
+      //var_dump($this->data['id']);
+      var_dump('-----------------------');
+      var_dump($this->data);
+
       $product = Product::find($this->data['id']);
 
       $product->update($this->data);
+
     }
 }

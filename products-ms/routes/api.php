@@ -20,11 +20,10 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('products')->group(function () {
 
   Route::post('products/store', [ProductController::class, 'store']);
+  Route::put('products/update', [ProductController::class, 'update']);
+
   Route::get('products', [ProductController::class, 'index']);
   Route::get('products/{product}', [ProductController::class, 'show']);
-  Route::put('products/{product}', [ProductController::class, 'update']);
-  Route::delete('products/{product}', [ProductController::class, 'destroy']);
 
-  
- 
+  Route::delete('products/{product}', [ProductController::class, 'destroy']);
 });

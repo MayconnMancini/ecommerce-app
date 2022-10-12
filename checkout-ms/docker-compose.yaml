@@ -13,9 +13,18 @@ services:
       - checkout
       - kafka
 
-  checkout_queue:
+  checkout_queue_customer:
     build: .
-    command: 'php artisan queue:work'
+    command: 'php artisan queue:work --queue=customer_topic'
+    depends_on:
+      - checkout_db
+    networks:
+      - checkout
+      - kafka
+
+  checkout_queue_products:
+    build: .
+    command: 'php artisan queue:work --queue=products_topic'
     depends_on:
       - checkout_db
     networks:

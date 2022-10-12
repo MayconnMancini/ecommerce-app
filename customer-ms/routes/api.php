@@ -18,12 +18,13 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('customers')->group(function () {
 
   Route::post('customers/store', [CustomerController::class, 'store']);
+  Route::put('customers/update', [CustomerController::class, 'update']);
+
   Route::get('customers', [CustomerController::class, 'index']);
   Route::get('customers/{customer}', [CustomerController::class, 'show']);
-  Route::put('customers/{customer}', [CustomerController::class, 'update']);
+  
   Route::delete('customers/{customer}', [CustomerController::class, 'destroy']);
 
   Route::get('customers/orders', [CustomerController::class, 'orders']);
-
-  
+  Route::get('customers/order/{$id}', [CustomerController::class, 'order']);  
 });

@@ -24,9 +24,11 @@ Route::prefix('checkout')->group(function () {
   //Route::get('links/{code}', [LinkController::class, 'show']);
   Route::post('orders/store', [OrderController::class, 'store']);
   Route::get('orders', [OrderController::class, 'index']);
-  Route::post('orders/confirm', [OrderController::class, 'confirm']);
 
   Route::get('orders/products', [OrderController::class, 'products']);
+  Route::get('orders/customers', [OrderController::class, 'customers']);
   
   Route::get('orders/{id}', [OrderController::class, 'show']);
+
+  Route::get('orders/orders/{user_id}', [OrderController::class, 'user_orders']);
 });

@@ -20,11 +20,7 @@ class ProductCreated implements ShouldQueue
     {
         $this->data = $data;
     }
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
+
     public function handle()
     {
       

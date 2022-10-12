@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\OrderCompleted;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
@@ -17,13 +18,37 @@ class OrderController extends Controller
   public function index()
   {
     return Order::all();
-    //return Product::all();
   }
 
   public function products()
   {
-    //return Order::all()->toJson();
     return Product::all();
+  }
+
+  public function customers()
+  {
+    return Customer::all();
+  }
+
+  public function user_orders($user_id)
+  {
+
+    try {
+      
+      $order = Order::where('user_id', $user_id);
+
+      $array = $order->toArray();
+
+      $array['order_items'] = $order->orderItems->toArray();
+
+      return $array;
+    } catch (\Throwable $e) {
+      return response([
+        'error' => $e->getMessage()
+      ], 400);
+    }
+
+    return Order::all();
   }
 
   public function create()
@@ -39,7 +64,7 @@ class OrderController extends Controller
 
       $order = new Order();
 
-      $order->user_id = "Implementar";
+      $order->user_id = $request->input('customer_id');
       $order->payment_id = "Implementar";
       $order->date = now();
       $order->total = 0;
@@ -65,33 +90,8 @@ class OrderController extends Controller
         $orderItem->save();
 
         $order->total = $order->total + $orderItem->subtotal;
-        /*
-            $lineItems[] = [
-                'name' => $product->title,
-                'description' => $product->description,
-                'images' => [
-                    $product->image
-                ],
-                'amount' => 100 * $product->price,
-                'currency' => 'usd',
-                'quantity' => $item['quantity']
-            ];
-            */
       }
 
-      /*
-        $stripe = Stripe::make(env('STRIPE_SECRET'));
-
-        $source = $stripe->checkout()->sessions()->create([
-            'payment_method_types' => ['card'],
-            'line_items' => $lineItems,
-            'success_url' => env('CHECKOUT_URL') . '/success?source={CHECKOUT_SESSION_ID}',
-            'cancel_url' => env('CHECKOUT_URL') . '/error'
-        ]);
-
-        $order->transaction_id = $source['id'];
-        
-        */
 
       $order->save();
 
@@ -101,6 +101,8 @@ class OrderController extends Controller
       $array = $order->toArray();
 
       $array['order_items'] = $order->orderItems->toArray();
+
+      $array['msg'] = "Pedido criado com sucesso! Em instanstes confirmaremos o pagamento";
 
       OrderCompleted::dispatch($array)->onQueue('email_topic');
       OrderCompleted::dispatch($array)->onQueue('customer_topic');

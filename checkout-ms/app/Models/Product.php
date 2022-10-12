@@ -10,11 +10,5 @@ class Product extends Model
     use \App\Traits\TraitUuid;
     use HasFactory;
 
-    protected $fillable = [
-      'id',
-      'name',
-      'description',
-      'price',
-      'inventory',
-    ];
+    protected $guarded = [];
 }

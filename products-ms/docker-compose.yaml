@@ -13,15 +13,6 @@ services:
       - products
       - kafka
 
-  products_queue:
-    build: .
-    command: 'php artisan queue:work'
-    depends_on:
-      - products_db
-    networks:
-      - products
-      - kafka
-
   products_db:
     image: mysql:8
     restart: always

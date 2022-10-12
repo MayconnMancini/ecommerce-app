@@ -73,7 +73,9 @@ return [
         // costum drive
         'kafka' => [
           'driver' => 'kafka',
-          'queue' => env('KAFKA_QUEUE', 'test'),
+          //'queue' => env('KAFKA_QUEUE', 'test'),
+          //'queue' => ['customer_topic','products_topic'],
+          //'queue' => 'customer_topic',
           'bootstrap_servers' => env('BOOTSTRAP_SERVERS'),
           //'security_protocol' => env('SECURITY_PROTOCOL'),
           //'sasl_mechanisms' => env('SASL_MECHANISMS'),
