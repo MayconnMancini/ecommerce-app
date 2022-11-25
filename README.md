@@ -1,8 +1,8 @@
 # ecommerce-app
 Mini app de e-commerce implementando microservices. TCC Sistemas de Informação - UFR
 
-Projeto de backend de um e-commerce implementando a arquitetura de Microservices. O projeto utiliza o Apache Kafka como message broker. Também foi implementado
-o Dokcer como solução de Containers.
+Projeto de backend de um e-commerce implementando a arquitetura de Microservices. O sistema utiliza o Apache Kafka como message broker. Também foi implementado
+o Docker como solução de Containers.
 
 ***Arquitetura****
 
