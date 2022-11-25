@@ -31,6 +31,15 @@ services:
       - checkout
       - kafka
 
+  checkout_queue_shipment-status:
+    build: .
+    command: 'php artisan queue:work --queue=shipment-updated_topic'
+    depends_on:
+      - checkout_db
+    networks:
+      - checkout
+      - kafka
+
   checkout_db:
     image: mysql:8
     restart: always

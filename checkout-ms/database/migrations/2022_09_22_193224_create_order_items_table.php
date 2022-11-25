@@ -17,6 +17,7 @@ class CreateOrderItemsTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('order_id');
             $table->uuid('product_id');
+            $table->string('product_name');
             $table->integer('quantity');
             $table->float('price', 15, 2);
             $table->float('subtotal', 15, 2);

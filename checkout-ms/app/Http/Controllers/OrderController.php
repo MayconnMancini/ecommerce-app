@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\OrderCompleted;
+use App\Jobs\OrderCreated;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Models\Order;
@@ -65,7 +66,7 @@ class OrderController extends Controller
       $order = new Order();
 
       $order->user_id = $request->input('customer_id');
-      $order->payment_id = "Implementar";
+      $order->payment_id = "-------";
       $order->date = now();
       $order->total = 0;
       $order->orderStatus = 'NOVO';
@@ -82,7 +83,7 @@ class OrderController extends Controller
         $orderItem->id = Str::uuid();
         $orderItem->order_id = $order->id;
         $orderItem->product_id = $product->id;
-        //$orderItem->name = $product->name;
+        $orderItem->product_name = $product->name;
         $orderItem->price = $product->price;
         $orderItem->quantity = $item['quantity'];
         $orderItem->subtotal = $product->price * $item['quantity'];
@@ -102,10 +103,11 @@ class OrderController extends Controller
 
       $array['order_items'] = $order->orderItems->toArray();
 
-      $array['msg'] = "Pedido criado com sucesso! Em instanstes confirmaremos o pagamento";
+      $array['msg'] = "Pedido criado com sucesso! Em breve estaremos enviado os produtos";
 
-      OrderCompleted::dispatch($array)->onQueue('email_topic');
-      OrderCompleted::dispatch($array)->onQueue('customer_topic');
+      OrderCreated::dispatch($array)->onQueue('email_topic');
+   
+      OrderCreated::dispatch($array)->onQueue('shipment_topic');
 
       return response([
         'msg' => 'success',

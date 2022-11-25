@@ -1,0 +1,1 @@
+O status de entrega do pedido #{{ $order['id'] }} foi atualizado para {{ $order['orderStatus'] }}

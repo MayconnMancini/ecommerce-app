@@ -28,6 +28,8 @@ class ProductController extends Controller
 
     ProductCreated::dispatch($product->toArray())->onQueue('products_topic');
 
+    ProductCreated::dispatch($product->toArray())->onQueue('email_topic');
+
     return response($product, Response::HTTP_CREATED);
   }
 
